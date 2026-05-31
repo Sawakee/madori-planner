@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>間取りプランナー</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>間取りプランナー</h1>
+  <div class="room-size">
+    <select id="addType">
+      <option value="room">部屋</option>
+      <option value="balcony">ベランダ</option>
+      <option value="void">吹き抜け</option>
+      <option value="wic">WIC</option>
+      <option value="stairs">階段</option>
+      <option value="storage">物置</option>
+      <option value="bath">お風呂</option>
+      <option value="lawn">芝生</option>
+      <option value="porch">ポーチ</option>
+      <option value="parking">駐車場</option>
+      <option value="bicycle">駐輪場</option>
+    </select>
+    <button id="addSpace">＋ 追加</button>
+  </div>
+  <div class="actions">
+    <button id="undo" title="元に戻す (Ctrl+Z)">↶ 戻す</button>
+    <button id="redo" title="やり直す (Ctrl+Y)">↷ やり直す</button>
+    <label class="chk"><input type="checkbox" id="snap" checked> 1cm刻みで移動</label>
+    <label class="chk"><input type="checkbox" id="showGrid" checked> グリッド(1マス=910mm/半間)</label>
+    <button id="measure">📏 計測</button>
+    <button id="fit">全体表示</button>
+    <button id="exportPng">画像保存</button>
+    <button id="exportJson">保存(JSON)</button>
+    <button id="importJson">読み込み</button>
+    <button id="clear" class="danger">全消去</button>
+  </div>
+</header>
+
+<div class="main">
+  <aside class="palette">
+    <h2>家具</h2>
+    <div class="cats" id="palette"></div>
+    <p class="tip">クリックで部屋に追加 →</p>
+  </aside>
+
+  <div class="canvas-wrap">
+    <canvas id="cv"></canvas>
+    <div class="zoom">
+      <button id="zoomOut">−</button>
+      <span id="zoomLabel">100%</span>
+      <button id="zoomIn">＋</button>
+    </div>
+  </div>
+
+  <aside class="props" id="props">
+    <h2 id="propsTitle">プロパティ</h2>
+    <div id="noSel" class="muted">家具または部屋を選んでください</div>
+
+    <div id="roomPanel" hidden>
+      <label>部屋名<input type="text" id="rName"></label>
+      <label>種類
+        <select id="rType">
+          <option value="room">部屋</option>
+          <option value="balcony">ベランダ</option>
+          <option value="void">吹き抜け</option>
+          <option value="wic">WIC</option>
+          <option value="stairs">階段</option>
+          <option value="storage">物置</option>
+          <option value="bath">お風呂</option>
+          <option value="lawn">芝生</option>
+          <option value="porch">ポーチ</option>
+          <option value="parking">駐車場</option>
+          <option value="bicycle">駐輪場</option>
+        </select>
+      </label>
+      <p class="tip" style="margin:6px 0">L字や凸型は「＋長方形を追加」。<b>Alt(Option)+ドラッグ</b>でその長方形だけ移動して形を調整、サイズは下の幅/奥行で数値指定。ふつうのドラッグは部屋ごと移動します。</p>
+      <div class="row">
+        <button id="rAddRect">＋ 長方形を追加</button>
+        <button id="rDelRect" class="danger">長方形を削除</button>
+      </div>
+      <div class="row">
+        <button id="rBathDir" hidden>向きを回転 (R)</button>
+      </div>
+      <label>幅<input type="number" id="rW" step="10"> mm</label>
+      <label>奥行<input type="number" id="rD" step="10"> mm</label>
+      <label>X位置<input type="number" id="rX" step="10"> mm</label>
+      <label>Y位置<input type="number" id="rY" step="10"> mm</label>
+      <span class="hint" id="roomHint"></span>
+      <div class="row">
+        <button id="rDupe">部屋を複製</button>
+        <button id="rDel" class="danger">部屋を削除</button>
+      </div>
+      <div class="row">
+        <button id="rToFront">最前面へ</button>
+        <button id="rToBack">最背面へ</button>
+      </div>
+    </div>
+
+    <div id="selPanel" hidden>
+      <label>名前<input type="text" id="pName"></label>
+      <label>幅<input type="number" id="pW" step="10"> mm</label>
+      <label>奥行<input type="number" id="pD" step="10"> mm</label>
+      <label>色<input type="color" id="pColor"></label>
+      <div class="row">
+        <button id="rotate">90°回転</button>
+        <button id="dupe">複製</button>
+        <button id="del" class="danger">削除</button>
+      </div>
+      <div class="row">
+        <button id="toFront">最前面へ</button>
+        <button id="toBack">最背面へ</button>
+      </div>
+    </div>
+    <hr>
+    <div class="calc">
+      <h2>電卓 (長さ計算)</h2>
+      <input type="text" id="calcInput" placeholder="例: 910*4 や 3640-600" autocomplete="off">
+      <div class="calc-result" id="calcResult">＝</div>
+      <div class="calc-keys" id="calcKeys"></div>
+      <p class="tip" style="margin:6px 0 0">+ − × ÷ ( ) が使えます。Enterで計算。結果は選択中の幅/奥行に「→幅」「→奥行」で入れられます。</p>
+      <div class="row">
+        <button id="calcToW">→ 幅へ</button>
+        <button id="calcToD">→ 奥行へ</button>
+      </div>
+    </div>
+    <hr>
+    <p class="tip">操作: クリックで選択 / Shift+クリックで複数選択 / 空欄をドラッグで範囲選択 / <b>選択したものをドラッグで一緒に移動</b> / Delで削除 / Rで回転 / ホイールで拡大縮小 / 右ドラッグで画面移動。一緒に動かしたい物は複数選択してからドラッグ（上に乗っているだけの物は動きません）。ドア/窓は壁の上に置くと開口になります。</p>
+  </aside>
+</div>
+
+<input type="file" id="fileInput" accept="application/json" hidden>
+<script src="app.js"></script>
+</body>
+</html>
