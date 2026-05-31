@@ -64,6 +64,59 @@ const PRESETS = [
   ]},
 ];
 
+// ===== サンプル間取り (「例」ボタン / example.json と同内容) =====
+const EXAMPLE = {
+  rooms: [
+    { id: 1, type: "room", name: "LDK", rects: [{ x: 910, y: 4450, w: 5460, d: 3660 }, { x: 910, y: 1720, w: 1820, d: 2730 }, { x: 2730, y: 810, w: 910, d: 3640 }] },
+    { id: 3, type: "bath", name: "浴室", bathDir: 0, rects: [{ x: 910, y: -2830, w: 1820, d: 1820 }] },
+    { id: 5, type: "room", name: "玄関", rects: [{ x: 2730, y: -2830, w: 910, d: 910 }] },
+    { id: 6, type: "room", name: "洋室", rects: [{ x: 3640, y: -2830, w: 2730, d: 3640 }] },
+    { id: 11, type: "balcony", name: "バルコニー", rects: [{ x: 910, y: 8110, w: 5460, d: 910 }] },
+    { id: 38, type: "room", name: "廊下", rects: [{ x: 2730, y: -1920, w: 910, d: 2730 }] },
+    { id: 41, type: "room", name: "脱衣室", rects: [{ x: 910, y: -1010, w: 1820, d: 1820 }] },
+    { id: 43, type: "room", name: "トイレ", rects: [{ x: 910, y: 810, w: 1820, d: 910 }] },
+    { id: 47, type: "room", name: "洋室", rects: [{ x: 3640, y: 1720, w: 2730, d: 2730 }] },
+  ],
+  items: [
+    { id: 34, name: "窓", x: 5315, y: -2820, w: 1650, d: 120, rot: 0, color: "#bfe3ef", type: "window" },
+    { id: 35, name: "窓", x: 2305, y: 8100, w: 1650, d: 120, rot: 0, color: "#bfe3ef", type: "window" },
+    { id: 37, name: "ドア", x: 2550, y: 320, w: 800, d: 120, rot: 90, color: "#e0b0b0", type: "door" },
+    { id: 39, name: "クローゼット", x: 4320, y: 1255, w: 1365, d: 910, rot: 0, color: "#c9a98a", type: "furniture" },
+    { id: 40, name: "クローゼット", x: 5705, y: 1290, w: 1365, d: 910, rot: 180, color: "#c9a98a", type: "furniture" },
+    { id: 42, name: "トイレ", x: 1430, y: 1295, w: 450, d: 700, rot: 90, color: "#cfd6df", type: "furniture" },
+    { id: 44, name: "洗面台", x: 1265, y: 270, w: 750, d: 500, rot: 90, color: "#cfd6df", type: "furniture" },
+    { id: 45, name: "洗濯機", x: 1265, y: -580, w: 600, d: 600, rot: 90, color: "#cfd6df", type: "furniture" },
+    { id: 46, name: "引き戸", x: 2085, y: -1010, w: 910, d: 120, rot: 0, color: "#cfe0e8", type: "sliding" },
+    { id: 48, name: "引き戸", x: 5680, y: 1695, w: 1365, d: 120, rot: 0, color: "#cfe0e8", type: "sliding" },
+    { id: 49, name: "引き戸", x: 4285, y: 820, w: 1365, d: 120, rot: 0, color: "#cfe0e8", type: "sliding" },
+    { id: 50, name: "窓", x: 4900, y: 8115, w: 1650, d: 120, rot: 0, color: "#bfe3ef", type: "window" },
+    { id: 53, name: "キッチン", x: 1770, y: 4065, w: 1600, d: 800, rot: 0, color: "#cfd6df", type: "furniture" },
+    { id: 54, name: "キッチン", x: 2180, y: 2175, w: 800, d: 800, rot: 180, color: "#cfd6df", type: "furniture" },
+    { id: 55, name: "ダイニングテーブル", x: 2060, y: 6495, w: 1200, d: 800, rot: 90, color: "#d9c08a", type: "furniture" },
+    { id: 56, name: "ソファ(2人)", x: 4050, y: 6435, w: 1500, d: 850, rot: 90, color: "#9ed0a8", type: "furniture" },
+    { id: 57, name: "TV台", x: 6090, y: 6445, w: 1500, d: 400, rot: 90, color: "#b0a8a0", type: "furniture" },
+    { id: 58, name: "椅子", x: 2810, y: 6185, w: 450, d: 450, rot: 0, color: "#c7b89a", type: "furniture" },
+    { id: 59, name: "椅子", x: 1310, y: 6205, w: 450, d: 450, rot: 0, color: "#c7b89a", type: "furniture" },
+    { id: 60, name: "冷蔵庫", x: 1310, y: 2195, w: 700, d: 700, rot: 180, color: "#cfd6df", type: "furniture" },
+    { id: 61, name: "食器棚", x: 1250, y: 5065, w: 900, d: 450, rot: 90, color: "#c9a98a", type: "furniture" },
+    { id: 62, name: "椅子", x: 1325, y: 6810, w: 450, d: 450, rot: 0, color: "#c7b89a", type: "furniture" },
+    { id: 63, name: "椅子", x: 2840, y: 6825, w: 450, d: 450, rot: 0, color: "#c7b89a", type: "furniture" },
+    { id: 64, name: "室外機", x: 5770, y: 8415, w: 800, d: 300, rot: 180, color: "#c8ccd0", type: "furniture" },
+    { id: 36, name: "ドア", x: 3820, y: 320, w: 800, d: 120, rot: 270, color: "#e0b0b0", type: "door" },
+    { id: 65, name: "ドア", x: 3825, y: 2245, w: 800, d: 120, rot: 270, color: "#e0b0b0", type: "door" },
+    { id: 66, name: "シングルベッド", x: 5710, y: 3285, w: 1000, d: 1950, rot: 0, color: "#a3c9e0", type: "furniture" },
+    { id: 67, name: "シングルベッド", x: 5770, y: -1555, w: 1000, d: 1950, rot: 0, color: "#a3c9e0", type: "furniture" },
+    { id: 68, name: "デスク", x: 4000, y: -2135, w: 1200, d: 600, rot: 90, color: "#d9c08a", type: "furniture" },
+    { id: 69, name: "椅子", x: 4660, y: -2085, w: 450, d: 450, rot: 270, color: "#c7b89a", type: "furniture" },
+    { id: 70, name: "デスク", x: 4345, y: 3990, w: 1200, d: 600, rot: 0, color: "#d9c08a", type: "furniture" },
+    { id: 71, name: "椅子", x: 4315, y: 3360, w: 450, d: 450, rot: 180, color: "#c7b89a", type: "furniture" },
+    { id: 72, name: "本棚", x: 5810, y: 4655, w: 900, d: 300, rot: 180, color: "#c9a98a", type: "furniture" },
+    { id: 73, name: "本棚", x: 4815, y: 4660, w: 900, d: 300, rot: 180, color: "#c9a98a", type: "furniture" },
+    { id: 74, name: "ローテーブル", x: 5220, y: 6465, w: 900, d: 500, rot: 90, color: "#d9c08a", type: "furniture" },
+    { id: 75, name: "ドア", x: 2865, y: 1275, w: 800, d: 120, rot: 270, color: "#e0b0b0", type: "door" },
+  ],
+};
+
 // ===== 状態 =====
 // 座標はすべて mm の絶対座標 (ワールド座標)。
 const state = {
@@ -1106,6 +1159,11 @@ $("exportJson").onclick = () => {
   const blob = new Blob([JSON.stringify({ rooms: state.rooms, items: state.items }, null, 2)], { type: "application/json" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob); a.download = "madori.json"; a.click();
+};
+$("loadExample").onclick = () => {
+  if (!confirm("現在の内容を例の間取りで置き換えます。よろしいですか？")) return;
+  adopt(JSON.parse(JSON.stringify(EXAMPLE))); // 複製して読み込み
+  clearSelection(); fitView(); save();
 };
 $("importJson").onclick = () => $("fileInput").click();
 $("fileInput").onchange = e => {
