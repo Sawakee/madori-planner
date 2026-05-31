@@ -1279,7 +1279,7 @@ $("calcToD").onclick = () => applyCalc("d");
 buildPalette();
 buildCalcKeys();
 if (!load()) {
-  state.rooms = [{ id: nextId++, name: "部屋1", type: "room", rects: [{ x: 0, y: 0, w: 3640, d: 2730 }] }];
+  adopt(JSON.parse(JSON.stringify(EXAMPLE))); // 初回はサンプル間取りを表示
 }
 persist(); // 移行結果などを保存し直す
 undoStack.push(snapshot()); // 初期状態を履歴の先頭に
